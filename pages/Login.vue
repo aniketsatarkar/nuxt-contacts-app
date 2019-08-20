@@ -11,6 +11,7 @@
             type="email"
             placeholder="Email"
             aria-required
+            @keyup.enter="login"
             @keyup="checkEmail">
           </b-input>
         </b-form-group>
@@ -20,14 +21,21 @@
             v-model="password"
             type="password"
             placeholder="Password"
+            @keyup.enter="login"
             @keyup="checkPassword">
           </b-input>
         </b-form-group>
         <b-form-group>
-          <b-button ref="loginBtn" disabled="true" variant="success" @click="login">Login</b-button>
+          <b-button
+            ref="loginBtn"
+            :disabled="!isFormValid"
+            variant="success"
+            @click="login">
+            Login
+          </b-button>
         </b-form-group>
         <b-form-group>
-          <b-link to="/register">Sign-Up</b-link>
+          <b-link to="/register">Don't have an account?</b-link>
         </b-form-group>
       </b-card-body>
     </b-card>
@@ -44,8 +52,9 @@ export default {
   mixins: [validationMixin],
   data() {
     return {
-      email: '',
-      password: ''
+      email: 'anikets@gmail.com',
+      password: 'anikets123',
+      isFormValid: false
     }
   },
   validations: {
@@ -62,16 +71,10 @@ export default {
   methods: {
     login() {
 
-      this.$v.$touch();
-
-      if (!this.$v.$invalid) {
-        // enable button.
-      }
-
       const creds = {
         email: this.email,
         password: this.password
-      }
+      };
 
       this.$axios({
         method : 'POST',
@@ -80,18 +83,20 @@ export default {
       })
       .then((res) => {
         if(res.status === 200) {
-          alert('success!');
+          this.$store.state.isLoggedIn = true;
+          this.$store.state.token = res.data.access_token;
+          this.$router.push({ path: '/home' });
         }
       })
       .catch((res) => {});
     },
     checkEmail() {
       this.$refs.email.state = !(this.$v.email.$invalid);
-      this.$refs.loginBtn.disabled = !(this.$v.$invalid);
+      this.isFormValid = !(this.$v.$invalid);
     },
     checkPassword() {
       this.$refs.password.state = !(this.$v.password.$invalid);
-      this.$refs.loginBtn.disabled = !(this.$v.$invalid);
+      this.isFormValid = !(this.$v.$invalid);
     }
   }
 }
