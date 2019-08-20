@@ -43,11 +43,6 @@ export default {
         {
           key: 'phone',
           sortable: true
-        },
-        {
-          key: 'Actions',
-          sortable: false,
-          colType: "button"
         }
       ],
       contacts: [],
@@ -84,6 +79,8 @@ export default {
       });
     },
     contactSelected(row) {
+      row = row[0];
+
       if(row === null || row === undefined || row === []) {
         this.isRowSelected = false;
       }
