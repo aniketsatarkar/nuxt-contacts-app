@@ -84,7 +84,10 @@ export default {
       .then((res) => {
         if(res.status === 200) {
           this.$store.state.isLoggedIn = true;
-          this.$store.state.token = res.data.access_token;
+          this.$cookies.set('token', res.data.access_token, {
+            path: '/',
+            maxAge: 60 * 60 * 24 * 30
+          })
           this.$router.push({ path: '/home' });
         }
       })
