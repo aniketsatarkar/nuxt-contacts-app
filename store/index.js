@@ -6,6 +6,14 @@ const store = () => {
       isLoggedIn : false,
       token: null
     },
+    getters: {
+      isLoggedIn(state) {
+        return state.isLoggedIn;
+      },
+      authToken(state) {
+        return state.token;
+      }
+    },
     mutations: {
       makeAsLoggedIn(state) {
         state.isLoggedIn = true;
@@ -15,7 +23,7 @@ const store = () => {
       }
     },
     actions: {
-      makeAsLoggedIn(context) {
+      markAsLoggedIn(context) {
         context.commit('makeAsLoggedIn');
       },
       markAsLoggedOut(context) {
