@@ -1,12 +1,12 @@
 <template>
   <b-row class="m-5">
-    <b-col cols="6">
+    <b-col cols="4">
       <h3>Contacts</h3>
     </b-col>
     <b-col col-6 class="d-flex justify-content-end">
-      <b-button size="sm" class="mr-1 ml-1" variant="info" @click="add">Add</b-button>
-      <b-button size="sm" class="mr-1 ml-1" v-if="this.isRowSelected" variant="success" @click="edit">Edit</b-button>
-      <b-button size="sm" class="ml-1" v-if="this.isRowSelected" variant="danger" @click="archive">Delete</b-button>
+      <b-button size="sm" class="mr-1 ml-1 fixed-size" variant="info" @click="add">Add</b-button>
+      <b-button size="sm" class="mr-1 ml-1 fixed-size" v-if="this.isRowSelected" variant="success" @click="edit">Edit</b-button>
+      <b-button size="sm" class="ml-1 fixed-size" v-if="this.isRowSelected" variant="danger" @click="archive">Delete</b-button>
     </b-col>
     <b-col cols="12" class="mt-3">
       <b-table
@@ -234,3 +234,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .fixed-size {
+    width: 70px;
+    height: 30px;
+  }
+</style>

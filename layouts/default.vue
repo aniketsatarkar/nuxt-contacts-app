@@ -5,7 +5,7 @@
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="#" active>Home</b-nav-item>
+          <b-nav-item to="/home" active>Home</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
           <b-button v-if="!this.$store.state.isLoggedIn" variant="success" class="m-1" to="/login">Login</b-button>
@@ -21,8 +21,9 @@
 export default {
   methods: {
     logout() {
+      this.$cookies.remove('token');
+      this.$store.dispatch('markAsLoggedOut');
       this.$store.state.isLoggedIn = false;
-      this.$store.state.token = null;
       this.$router.push({ path: '/' });
     }
   }
