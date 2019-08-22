@@ -1,5 +1,10 @@
 export default {
   mode: 'universal',
+
+  router: {
+    middleware: 'authenticated'
+  },
+
   /*
    ** Headers of the page
    */
@@ -58,5 +63,8 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
-  }
+  },
+  middlewares: [
+    'authenticated'
+  ]
 }

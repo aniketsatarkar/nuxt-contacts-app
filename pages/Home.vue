@@ -31,7 +31,6 @@
         aria-controls="contacts-table">
       </b-pagination>
     </b-col>
-
     <!-- modal -->
     <b-modal ref="modal" ok-title="Save" @ok="save">
       <b-form>
@@ -66,7 +65,6 @@
         </b-form-group>
       </b-form>
     </b-modal>
-
   </b-row>
 </template>
 
